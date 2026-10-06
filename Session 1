@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 Grid Lab — Playlist / Profile / Music Apps</title>
+
+  <!-- ============================================================
+       TASK 1: Bootstrap 5 CSS via the official CDN
+       ============================================================ -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <style>
+    /* Small custom touches that Bootstrap doesn't cover */
+    body { background: #f5f6fa; }
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+    }
+    .section-title {
+      border-left: 4px solid #6f42c1;
+      padding-left: 10px;
+    }
+  </style>
+</head>
+<body class="p-3">
+
+  <!-- ============================================================
+       TASK 1: Bootstrap verification button
+       If Bootstrap loaded, this renders as a purple/blue rounded
+       button with hover state. If it looks like plain HTML, the
+       CDN link failed.
+       ============================================================ -->
+  <div class="container my-4">
+    <h5 class="section-title mb-3">Task 1 — Bootstrap Verification</h5>
+    <button class="btn btn-primary">Test Button</button>
+  </div>
+
+  <!-- ============================================================
+       TASK 2: Full-width row with centered welcome text
+       ------------------------------------------------------------
+       - container centers the layout horizontally
+       - row + col-12 creates a full-width column
+       - text-center horizontally centers the text
+       - py-5 gives vertical breathing room
+       ============================================================ -->
+  <div class="container my-4">
+    <h5 class="section-title mb-3">Task 2 — Centered Welcome Row</h5>
+
+    <div class="row">
+      <div class="col-12 text-center py-5 bg-white rounded-3 shadow-sm">
+        <h1 class="fw-bold text-primary mb-0">Welcome to My Playlist</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TASK 3: Two-column Instagram-style layout
+       ------------------------------------------------------------
+       - col-md-6 → each column takes half width on md+ screens
+       - On mobile (below md) → columns stack vertically
+       - img-fluid makes the image responsive
+       ============================================================ -->
+  <div class="container my-4">
+    <h5 class="section-title mb-3">Task 3 — Two-Column Profile Layout</h5>
+
+    <div class="row g-4 align-items-center bg-white rounded-3 shadow-sm p-4">
+      <!-- LEFT: Profile picture -->
+      <div class="col-12 col-md-6 text-center">
+        <img
+          src="https://i.pravatar.cc/200?img=45"
+          alt="Profile picture"
+          class="img-fluid rounded-circle profile-pic border border-4 border-primary shadow">
+      </div>
+
+      <!-- RIGHT: Bio -->
+      <div class="col-12 col-md-6">
+        <h3 class="fw-bold mb-1">@melody.maya</h3>
+        <p class="text-muted mb-2">🎧 Music lover · Playlist curator</p>
+        <p class="mb-0">
+          Hi! I'm Maya — I spend my days hunting for hidden indie gems
+          and my nights building the perfect late-night lo-fi playlist.
+          Follow along if you love discovering new sounds.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TASK 4: Three-column layout — narrower right column
+       ------------------------------------------------------------
+       Column widths:
+         • Profile picture → col-md-4
+         • Bio             → col-md-5
+         • Music apps      → col-md-3 (narrowest) ✅
+       Total = 12 columns
+       ============================================================ -->
+  <div class="container my-4">
+    <h5 class="section-title mb-3">Task 4 — Three-Column Layout</h5>
+
+    <div class="row g-4 align-items-start bg-white rounded-3 shadow-sm p-4">
+
+      <!-- LEFT: Profile picture -->
+      <div class="col-12 col-md-4 text-center">
+        <img
+          src="https://i.pravatar.cc/200?img=45"
+          alt="Profile picture"
+          class="img-fluid rounded-circle profile-pic border border-4 border-primary shadow">
+      </div>
+
+      <!-- MIDDLE: Bio -->
+      <div class="col-12 col-md-5">
+        <h3 class="fw-bold mb-1">@melody.maya</h3>
+        <p class="text-muted mb-2">🎧 Music lover · Playlist curator</p>
+        <p class="mb-0">
+          Hi! I'm Maya — I spend my days hunting for hidden indie gems
+          and my nights building the perfect late-night lo-fi playlist.
+        </p>
+      </div>
+
+      <!-- RIGHT: Favorite music apps (narrower column) -->
+      <div class="col-12 col-md-3">
+        <h6 class="fw-bold text-uppercase text-muted small mb-2">
+          Favorite Apps
+        </h6>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Spotify
+            <span class="badge bg-success rounded-pill">1</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            YouTube Music
+            <span class="badge bg-danger rounded-pill">2</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Wynk
+            <span class="badge bg-warning text-dark rounded-pill">3</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS bundle (optional — useful later for modals, dropdowns, etc.) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
