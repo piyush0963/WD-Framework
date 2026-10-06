@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 Forms Lab — Floating Labels & Validation</title>
+
+  <!-- Bootstrap 5 CSS via official CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <style>
+    body { background: #f5f6fa; }
+    .section-title {
+      border-left: 4px solid #6f42c1;
+      padding-left: 10px;
+    }
+    .form-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      padding: 28px;
+    }
+  </style>
+</head>
+<body class="p-3">
+
+<!-- ============================================================
+     TASK 1: Login Form with Floating Labels
+     ------------------------------------------------------------
+     Bootstrap floating labels require:
+       1. Wrapper: <div class="form-floating">
+       2. Input BEFORE label (order matters!)
+       3. Input has a placeholder (even if it's just " ") —
+          floating labels use :placeholder-shown to detect emptiness.
+     ============================================================ -->
+<div class="container my-5">
+  <h5 class="section-title mb-3">Task 1 — Login Form (Floating Labels)</h5>
+
+  <div class="form-card" style="max-width: 460px;">
+    <form novalidate>
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="loginUsername"
+          placeholder="username"
+          autocomplete="username">
+        <label for="loginUsername">Username</label>
+      </div>
+
+      <div class="form-floating mb-4">
+        <input
+          type="password"
+          class="form-control"
+          id="loginPassword"
+          placeholder="password"
+          autocomplete="current-password">
+        <label for="loginPassword">Password</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+        Log In
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     TASK 2: Foodie App Sign-Up Form with Validation
+     ------------------------------------------------------------
+     Key pieces:
+       • Add `novalidate` on <form> to disable browser defaults
+       • Add `needs-validation` class + JS to trigger Bootstrap styles
+       • Each input gets `required` / `type="email"` / `minlength`
+       • Add <div class="invalid-feedback"> INSIDE the wrapper
+     ============================================================ -->
+<div class="container my-5">
+  <h5 class="section-title mb-3">Task 2 — Foodie App Sign-Up (Validation)</h5>
+
+  <div class="form-card" style="max-width: 520px;">
+    <form id="foodieForm" class="needs-validation" novalidate>
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="foodieUser" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="foodieUser"
+          placeholder="e.g. snack_attack"
+          required
+          minlength="3">
+        <div class="invalid-feedback">
+          Please enter a username (at least 3 characters).
+        </div>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="foodieEmail" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="foodieEmail"
+          placeholder="you@example.com"
+          required>
+        <div class="invalid-feedback">
+          Please enter a valid email address.
+        </div>
+        <div class="valid-feedback">
+          Email looks great!
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="foodiePass" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="foodiePass"
+          placeholder="••••••••"
+          required
+          minlength="6">
+        <div class="invalid-feedback">
+          Password must be at least 6 characters.
+        </div>
+        <div class="valid-feedback">
+          Strong enough!
+        </div>
+      </div>
+
+      <button class="btn btn-primary w-100 py-2 fw-semibold" type="submit">
+        Sign Up 🍔
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     TASK 3: BookMyShow Ticket Booking Form
+     ------------------------------------------------------------
+     Fields:
+       • Movie name (required text)
+       • Number of tickets (required number, min 1, max 10)
+       • User email (required email)
+     Each field shows valid/invalid feedback below it.
+     ============================================================ -->
+<div class="container my-5">
+  <h5 class="section-title mb-3">Task 3 — BookMyShow Ticket Booking</h5>
+
+  <div class="form-card" style="max-width: 520px;">
+    <form id="bmsForm" class="needs-validation" novalidate>
+
+      <!-- Movie name -->
+      <div class="mb-3">
+        <label for="movieName" class="form-label">Movie Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="movieName"
+          placeholder="e.g. The Midnight Protocol"
+          required
+          minlength="2">
+        <div class="invalid-feedback">
+          Please enter the movie name (at least 2 characters).
+        </div>
+        <div class="valid-feedback">
+          🎬 Movie selected!
+        </div>
+      </div>
+
+      <!-- Number of tickets -->
+      <div class="mb-3">
+        <label for="ticketCount" class="form-label">Number of Tickets</label>
+        <input
+          type="number"
+          class="form-control"
+          id="ticketCount"
+          placeholder="1 – 10"
+          min="1"
+          max="10"
+          required>
+        <div class="invalid-feedback">
+          Please enter a number between 1 and 10.
+        </div>
+        <div class="valid-feedback">
+          🎟️ Great — seats available!
+        </div>
+      </div>
+
+      <!-- User email -->
+      <div class="mb-3">
+        <label for="bmsEmail" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="bmsEmail"
+          placeholder="you@example.com"
+          required>
+        <div class="invalid-feedback">
+          Please enter a valid email to receive your tickets.
+        </div>
+        <div class="valid-feedback">
+          ✅ Confirmation will be sent here.
+        </div>
+      </div>
+
+      <button class="btn btn-danger w-100 py-2 fw-semibold" type="submit">
+        Book Tickets 🎟️
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     TASK 4: Refactored Form — Floating Labels + Validation
+     ------------------------------------------------------------
+     Bootstrap's floating labels work seamlessly with .is-valid /
+     .is-invalid classes because they only change the border and
+     icon color — the wrapper keeps the label floating.
+
+     ⚠️ Compatibility note:
+       - The <label> must come AFTER the <input> (required for
+         floating labels).
+       - The input MUST have a placeholder (Bootstrap uses
+         :placeholder-shown to decide whether the label floats
+         or sits inside the field).
+       - The invalid-feedback div must be INSIDE .form-floating
+         so it appears directly under the field.
+     ============================================================ -->
+<div class="container my-5">
+  <h5 class="section-title mb-3">Task 4 — Refactored: Floating Labels + Validation</h5>
+
+  <div class="form-card" style="max-width: 520px;">
+    <form id="refactorForm" class="needs-validation" novalidate>
+
+      <!-- Floating username -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="refUser"
+          placeholder="username"
+          required
+          minlength="3">
+        <label for="refUser">Username</label>
+        <div class="invalid-feedback">
+          Username must be at least 3 characters.
+        </div>
+        <div class="valid-feedback">
+          Username available!
+        </div>
+      </div>
+
+      <!-- Floating email -->
+      <div class="form-floating mb-3">
+        <input
+          type="email"
+          class="form-control"
+          id="refEmail"
+          placeholder="email"
+          required>
+        <label for="refEmail">Email</label>
+        <div class="invalid-feedback">
+          Please enter a valid email.
+        </div>
+        <div class="valid-feedback">
+          Email verified!
+        </div>
+      </div>
+
+      <!-- Floating password -->
+      <div class="form-floating mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="refPass"
+          placeholder="password"
+          required
+          minlength="6">
+        <label for="refPass">Password</label>
+        <div class="invalid-feedback">
+          Password must be at least 6 characters.
+        </div>
+        <div class="valid-feedback">
+          Password looks strong!
+        </div>
+      </div>
+
+      <!-- Floating select — supported in Bootstrap 5.3+ -->
+      <div class="form-floating mb-4">
+        <select class="form-select" id="refGenre" required>
+          <option value="" selected disabled>Choose a favorite genre…</option>
+          <option>Pop</option>
+          <option>Rock</option>
+          <option>Hip-Hop</option>
+          <option>Jazz</option>
+          <option>EDM</option>
+        </select>
+        <label for="refGenre">Favorite Genre</label>
+        <div class="invalid-feedback">
+          Please select a genre.
+        </div>
+        <div class="valid-feedback">
+          Nice choice!
+        </div>
+      </div>
+
+      <button class="btn btn-success w-100 py-2 fw-semibold" type="submit">
+        Save Preferences 🎵
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     JavaScript — Bootstrap's standard validation pattern
+     ------------------------------------------------------------
+     We attach this to EVERY form with the .needs-validation class
+     so all four forms get the same behavior.
+     ============================================================ -->
+<script>
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('.needs-validation');
+
+    forms.forEach(form => {
+      form.addEventListener('submit', event => {
+        event.preventDefault();   // stop page reload
+        event.stopPropagation();
+
+        if (!form.checkValidity()) {
+          // Show red borders + invalid-feedback on every bad field
+          form.classList.add('was-validated');
+        } else {
+          // Valid: green borders + valid-feedback
+          form.classList.add('was-validated');
+
+          // Optional: give visible confirmation
+          const btn = form.querySelector('button[type="submit"]');
+          const original = btn.innerHTML;
+          btn.innerHTML = '✅ Submitted!';
+          btn.disabled = true;
+          setTimeout(() => {
+            btn.innerHTML = original;
+            btn.disabled = false;
+            form.reset();
+            form.classList.remove('was-validated');
+          }, 1600);
+        }
+      });
+    });
+  });
+</script>
+
+<!-- Bootstrap JS bundle (needed for interactive components; not required for validation itself) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
