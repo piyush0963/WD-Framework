@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 Lab — Profile / Navbar / Banner / Grid</title>
+
+  <!-- ============================================================
+       Bootstrap 5 CSS via CDN
+       ============================================================ -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <style>
+    /* Minor custom tweaks (Bootstrap covers 99% of the styling) */
+    body { background: #f8f9fa; }
+    .poster-card img { height: 340px; object-fit: cover; }
+  </style>
+</head>
+
+<body class="p-4">
+
+  <!-- ============================================================
+       TASK 1: Food Delivery Profile Card
+       ------------------------------------------------------------
+       Utility classes used:
+         • m-3      → margin: 1rem on all sides
+         • p-2      → padding: 0.5rem on all sides
+         • bg-primary → Bootstrap primary background color
+         • text-white → readable text on primary
+         • rounded-3, shadow → extra polish
+       ============================================================ -->
+  <h5 class="text-muted mb-2">Task 1 — Profile Card</h5>
+
+  <div class="card m-3 p-2 bg-primary text-white rounded-3 shadow" style="max-width: 20rem;">
+    <div class="card-body text-center">
+      <!-- Circular avatar -->
+      <img
+        src="https://i.pravatar.cc/100?img=32"
+        alt="User avatar"
+        class="rounded-circle mb-3 border border-3 border-white"
+        width="80" height="80">
+
+      <h5 class="card-title mb-1">Priya Sharma</h5>
+      <p class="card-text small mb-3">🍕 Foodie Level: Gold Member</p>
+
+      <button class="btn btn-light btn-sm fw-semibold px-3">
+        View Orders
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TASK 2: Flipkart-style Horizontal Navbar
+       ------------------------------------------------------------
+       Bootstrap utilities used:
+         • d-flex          → display: flex
+         • align-items-center → vertical centering
+         • flex-row        → items side by side
+         • mx-2            → horizontal margin on each link
+         • justify-content-between → logo left, links right
+       ============================================================ -->
+  <h5 class="text-muted mt-5 mb-2">Task 2 — Flipkart-style Navbar</h5>
+
+  <nav class="navbar navbar-dark bg-primary rounded-3 px-4 shadow-sm">
+    <div class="container-fluid d-flex flex-row align-items-center justify-content-between p-0">
+
+      <!-- Brand -->
+      <a href="#" class="navbar-brand fw-bold fs-4 text-warning mb-0">
+        Flipkart
+      </a>
+
+      <!-- Horizontal links with mx-2 spacing -->
+      <div class="d-flex flex-row align-items-center">
+        <a href="#" class="nav-link text-white fw-medium mx-2">Home</a>
+        <a href="#" class="nav-link text-white fw-medium mx-2">Mobiles</a>
+        <a href="#" class="nav-link text-white fw-medium mx-2">Fashion</a>
+        <a href="#" class="nav-link text-white fw-medium mx-2">Electronics</a>
+        <a href="#" class="nav-link text-white fw-medium mx-2">Cart 🛒</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       TASK 3: Promo Banner visible only on md and larger
+       ------------------------------------------------------------
+       d-none          → hidden by default (mobile-first)
+       d-md-block      → displayed as block from ≥768px upward
+       ============================================================ -->
+  <h5 class="text-muted mt-5 mb-2">Task 3 — Responsive Promo Banner</h5>
+
+  <div class="alert alert-warning text-center fw-bold d-none d-md-block rounded-3 shadow-sm">
+    🔥 20% OFF Today! Use code <span class="text-danger">FOODIE20</span> at checkout.
+  </div>
+
+  <!-- Small hint shown only on mobile so the demo is obvious -->
+  <div class="alert alert-secondary text-center small d-block d-md-none rounded-3">
+    Promo banner hidden on small screens — resize wider to see it.
+  </div>
+
+  <!-- ============================================================
+       TASK 4: BookMyShow-style Movie Poster Grid
+       ------------------------------------------------------------
+       Spacing utilities used:
+         • p-1 on mobile (base)
+         • p-4 on desktop (md and up)
+         • col-12 col-sm-6 col-md-4 → responsive column widths
+       ============================================================ -->
+  <h5 class="text-muted mt-5 mb-2">Task 4 — Movie Poster Grid</h5>
+
+  <div class="row g-3">
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card poster-card p-1 p-md-4 shadow-sm h-100">
+        <img
+          src="https://picsum.photos/seed/movie1/400/600"
+          alt="Movie 1 poster"
+          class="card-img-top rounded">
+        <div class="card-body px-0">
+          <h6 class="card-title mb-1">The Midnight Protocol</h6>
+          <p class="card-text small text-muted mb-0">Action · 2h 18m</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card poster-card p-1 p-md-4 shadow-sm h-100">
+        <img
+          src="https://picsum.photos/seed/movie2/400/600"
+          alt="Movie 2 poster"
+          class="card-img-top rounded">
+        <div class="card-body px-0">
+          <h6 class="card-title mb-1">Echoes of Tomorrow</h6>
+          <p class="card-text small text-muted mb-0">Sci-Fi · 2h 05m</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card poster-card p-1 p-md-4 shadow-sm h-100">
+        <img
+          src="https://picsum.photos/seed/movie3/400/600"
+          alt="Movie 3 poster"
+          class="card-img-top rounded">
+        <div class="card-body px-0">
+          <h6 class="card-title mb-1">Sunset Boulevard</h6>
+          <p class="card-text small text-muted mb-0">Drama · 1h 52m</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap JS bundle (optional — included for completeness) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
