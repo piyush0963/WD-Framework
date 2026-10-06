@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- ============================================================
+       TASK 1: Viewport meta tag — critical for mobile scaling.
+       Without it, phones render the page at desktop width (980px)
+       and shrink everything down.
+       ============================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Web Lab</title>
+
+  <style>
+    /* ============================================================
+       GLOBAL RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1a1a1a;
+      background: #f5f6fa;
+      line-height: 1.5;
+    }
+    h1, h2, h3, h4 { margin: 0 0 12px; }
+    img { max-width: 100%; display: block; }
+    button, input, select { font-family: inherit; font-size: inherit; }
+
+    /* ============================================================
+       TASK 1: FOOD DELIVERY LANDING PAGE
+       - Header (nav + logo)
+       - Hero image with overlay
+       - Order button
+       ============================================================ */
+    .fd-header {
+      background: #e23744;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fd-header .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .fd-header nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      font-size: 15px;
+    }
+    .fd-header nav a:hover { text-decoration: underline; }
+
+    .fd-hero {
+      position: relative;
+      min-height: 380px;
+      background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 40px 20px;
+    }
+    .fd-hero h1 {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      max-width: 700px;
+      margin-bottom: 14px;
+    }
+    .fd-hero p {
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      max-width: 560px;
+      margin-bottom: 26px;
+      opacity: 0.92;
+    }
+    .fd-order-btn {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      font-size: 17px;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .fd-order-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(255, 107, 107, 0.6);
+    }
+
+    /* ============================================================
+       TASK 2: MOVIE STREAMING HOMEPAGE
+       - Mobile (<600px): hamburger menu
+       - Tablet (600–1024px): horizontal nav, tighter spacing
+       - Desktop (>1024px): horizontal nav, extra spacing
+       ============================================================ */
+    .stream-header {
+      background: #14141c;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .stream-header .logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1DB954;
+    }
+    .stream-nav {
+      display: flex;              /* default desktop layout */
+      gap: 36px;                  /* extra spacing on desktop */
+    }
+    .stream-nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    .stream-nav a:hover { color: #1DB954; }
+
+    .hamburger-btn {
+      display: none;              /* hidden on desktop/tablet */
+      background: none;
+      border: none;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .mobile-drawer {
+      display: none;              /* shown when toggled on mobile */
+      flex-direction: column;
+      background: #1e1e2a;
+      padding: 10px 20px 16px;
+    }
+    .mobile-drawer a {
+      color: #ddd;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid #2c2c3a;
+    }
+    .mobile-drawer a:last-child { border-bottom: none; }
+    .mobile-drawer.open { display: flex; }
+
+    /* Tablet: 600px – 1024px */
+    @media (min-width: 600px) and (max-width: 1024px) {
+      .stream-nav {
+        gap: 18px;                /* tighter spacing on tablet */
+      }
+      .stream-nav a { font-size: 14px; }
+    }
+
+    /* Mobile: below 600px */
+    @media (max-width: 599px) {
+      .stream-nav { display: none; }     /* hide horizontal nav */
+      .hamburger-btn { display: block; } /* show hamburger */
+    }
+
+    /* Hero section for streaming homepage */
+    .stream-hero {
+      background: linear-gradient(135deg, #1DB954, #0e7a36);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .stream-hero h2 {
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+    }
+    .stream-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.92;
+    }
+
+    /* ============================================================
+       TASK 3: FLIPKART-STYLE PRODUCT GRID (mobile-first)
+       - Mobile: 1 column (stacked)
+       - Tablet (600px+): 2 columns
+       - Desktop (1024px+): 4 columns
+       ============================================================ */
+    .products-section {
+      padding: 32px 20px;
+      background: #fff;
+    }
+    .products-section h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr;      /* mobile: 1 col */
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Tablet: 2 columns */
+    @media (min-width: 600px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Desktop: 4 columns */
+    @media (min-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.10);
+    }
+    .product-card .thumb {
+      height: 180px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+    }
+    .product-card .info {
+      padding: 14px;
+    }
+    .product-card h3 {
+      font-size: 15px;
+      margin: 0 0 6px;
+    }
+    .product-card .price {
+      color: #388e3c;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .product-card .mrp {
+      color: #9e9e9e;
+      text-decoration: line-through;
+      font-size: 14px;
+      margin-left: 6px;
+    }
+
+    /* ============================================================
+       TASK 4: BOOKMYSHOW ACCESSIBLE FORM
+       ============================================================ */
+    .bms-section {
+      padding: 40px 20px;
+      background: #f0f2f5;
+    }
+    .bms-form-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+    .bms-form-wrap h2 {
+      color: #e23744;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .bms-field {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .bms-field label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #333;
+    }
+    .bms-field input,
+    .bms-field select {
+      padding: 12px 14px;
+      border: 2px solid #dfe0e5;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .bms-field input:focus,
+    .bms-field select:focus {
+      border-color: #e23744;
+      box-shadow: 0 0 0 4px rgba(226, 55, 68, 0.18);
+    }
+    .bms-field .hint {
+      font-size: 12px;
+      color: #777;
+      margin-top: 4px;
+    }
+    .bms-submit {
+      width: 100%;
+      padding: 14px;
+      background: #e23744;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .bms-submit:hover { background: #c92d3a; }
+    .bms-submit:active { transform: scale(0.98); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 13px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     TASK 1: FOOD DELIVERY LANDING PAGE
+     ============================================================ -->
+<header class="fd-header" role="banner">
+  <span class="logo">🥡 FoodRush</span>
+  <nav aria-label="Main navigation">
+    <a href="#fd">Home</a>
+    <a href="#products">Menu</a>
+    <a href="#bms">Support</a>
+  </nav>
+</header>
+
+<section class="fd-hero" id="fd" aria-label="Food delivery hero">
+  <h1>Craving something delicious?</h1>
+  <p>Get your favorite meals delivered hot and fresh to your doorstep in 30 minutes.</p>
+  <button class="fd-order-btn" type="button" aria-label="Order food now">
+    Order Now 🍔
+  </button>
+</section>
+
+<!-- ============================================================
+     TASK 2: MOVIE STREAMING HOMEPAGE
+     ============================================================ -->
+<header class="stream-header" role="banner">
+  <span class="logo">🎬 Streamly</span>
+
+  <!-- Desktop / tablet horizontal nav -->
+  <nav class="stream-nav" aria-label="Streaming site navigation">
+    <a href="#">Home</a>
+    <a href="#">Movies</a>
+    <a href="#">TV Shows</a>
+    <a href="#">My List</a>
+    <a href="#">Profile</a>
+  </nav>
+
+  <!-- Mobile hamburger -->
+  <button
+    class="hamburger-btn"
+    id="hamburgerBtn"
+    type="button"
+    aria-label="Toggle navigation menu"
+    aria-expanded="false"
+    aria-controls="mobileDrawer">
+    ☰
+  </button>
+</header>
+
+<!-- Mobile drawer (hidden by default) -->
+<nav class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+  <a href="#">Home</a>
+  <a href="#">Movies</a>
+  <a href="#">TV Shows</a>
+  <a href="#">My List</a>
+  <a href="#">Profile</a>
+</nav>
+
+<section class="stream-hero" aria-label="Streaming welcome banner">
+  <h2>Unlimited movies, TV shows, and more.</h2>
+  <p>Watch anywhere. Cancel anytime. Stream thousands of titles on any device.</p>
+</section>
+
+<!-- ============================================================
+     TASK 3: FLIPKART-STYLE PRODUCT GRID
+     ============================================================ -->
+<section class="products-section" id="products" aria-labelledby="productsHeading">
+  <h2 id="productsHeading">Trending Products</h2>
+
+  <div class="product-grid">
+    <article class="product-card">
+      <div class="thumb">📱</div>
+      <div class="info">
+        <h3>Smartphone X Pro 5G</h3>
+        <span class="price">₹24,999</span>
+        <span class="mrp">₹32,999</span>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="thumb">💻</div>
+      <div class="info">
+        <h3>UltraBook 14" Laptop</h3>
+        <span class="price">₹54,990</span>
+        <span class="mrp">₹62,990</span>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="thumb">🎧</div>
+      <div class="info">
+        <h3>Noise-Cancel Headphones</h3>
+        <span class="price">₹2,499</span>
+        <span class="mrp">₹4,999</span>
+      </div>
+    </article>
+
+    <article class="product-card">
+      <div class="thumb">⌚</div>
+      <div class="info">
+        <h3>Smartwatch Series 7</h3>
+        <span class="price">₹3,299</span>
+        <span class="mrp">₹5,499</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     TASK 4: BOOKMYSHOW ACCESSIBLE FORM
+     - role="form" on the wrapper
+     - aria-labelledby links form to its heading
+     - aria-label on button
+     - aria-describedby links inputs to their hints
+     - required + aria-required for screen readers
+     ============================================================ -->
+<section class="bms-section" id="bms">
+  <div
+    class="bms-form-wrap"
+    role="form"
+    aria-labelledby="bmsFormHeading">
+
+    <h2 id="bmsFormHeading">🎬 Book Your Movie Tickets</h2>
+
+    <form
+      id="bmsForm"
+      method="post"
+      action="#"
+      novalidate
+      aria-label="BookMyShow ticket booking form">
+
+      <!-- Movie name -->
+      <div class="bms-field">
+        <label for="movieTitle">Movie Name</label>
+        <input
+          type="text"
+          id="movieTitle"
+          name="movieTitle"
+          placeholder="e.g. The Midnight Protocol"
+          required
+          aria-required="true"
+          aria-describedby="movieHint">
+        <span class="hint" id="movieHint">
+          Enter the exact title of the movie you want to watch.
+        </span>
+      </div>
+
+      <!-- Number of tickets -->
+      <div class="bms-field">
+        <label for="ticketCount">Number of Tickets</label>
+        <input
+          type="number"
+          id="ticketCount"
+          name="ticketCount"
+          min="1"
+          max="10"
+          value="1"
+          required
+          aria-required="true"
+          aria-describedby="ticketHint">
+        <span class="hint" id="ticketHint">
+          You can book between 1 and 10 tickets per transaction.
+        </span>
+      </div>
+
+      <!-- Email -->
+      <div class="bms-field">
+        <label for="userEmail">Email Address</label>
+        <input
+          type="email"
+          id="userEmail"
+          name="userEmail"
+          placeholder="you@example.com"
+          required
+          aria-required="true"
+          aria-describedby="emailHint">
+        <span class="hint" id="emailHint">
+          Your tickets and confirmation will be sent to this email.
+        </span>
+      </div>
+
+      <!-- Showtime -->
+      <div class="bms-field">
+        <label for="showtime">Preferred Showtime</label>
+        <select
+          id="showtime"
+          name="showtime"
+          required
+          aria-required="true"
+          aria-describedby="showHint">
+          <option value="" disabled selected>Choose a showtime…</option>
+          <option value="10:30">10:30 AM</option>
+          <option value="14:00">2:00 PM</option>
+          <option value="18:30">6:30 PM</option>
+          <option value="21:45">9:45 PM</option>
+        </select>
+        <span class="hint" id="showHint">
+          Select the time that works best for you.
+        </span>
+      </div>
+
+      <!-- Submit button with aria-label -->
+      <button
+        type="submit"
+        class="bms-submit"
+        aria-label="Confirm and book the selected movie tickets">
+        Book Tickets 🎟️
+      </button>
+
+    </form>
+  </div>
+</section>
+
+<footer role="contentinfo">
+  © 2025 Responsive Web Lab — Built with plain HTML, CSS &amp; love.
+</footer>
+
+<!-- ============================================================
+     Small JS for the hamburger toggle (Task 2)
+     ============================================================ -->
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileDrawer.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+</script>
+
+</body>
+</html>
