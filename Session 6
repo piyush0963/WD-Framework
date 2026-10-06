@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Lab — Instagram / Spotify / Zomato</title>
+
+  <!-- ============================================================
+       TASK 1: Tailwind CSS via CDN
+       ------------------------------------------------------------
+       The script tag below loads Tailwind's Play CDN, which scans
+       the HTML and injects the utility classes at runtime.
+       (Play CDN is for prototyping only — not for production.)
+       ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Optional Tailwind config — extend colors / fonts if desired -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            spotify: '#1DB954',
+            zomato:  '#e23744',
+            igPink:  '#e1306c',
+          },
+          fontFamily: {
+            sans: ['Segoe UI', 'Helvetica', 'Arial', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<!-- ============================================================
+     TASK 1: `bg-sky-200` on <body> verifies Tailwind is loaded.
+     If Tailwind works, the whole page background is sky-200.
+     ============================================================ -->
+<body class="bg-sky-200 font-sans min-h-screen p-6 space-y-10">
+
+  <!-- ============================================================
+       TASK 2: Instagram-style Profile Card
+       ------------------------------------------------------------
+       - Circular profile image → rounded-full on <img>
+       - Username + handle
+       - 'Follow' button with custom Instagram pink color
+       - Centered with flex utilities and shadowed card
+       ============================================================ -->
+  <section class="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6">
+    <h2 class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-4 text-center">
+      Task 2 — Instagram Profile
+    </h2>
+
+    <div class="flex flex-col items-center text-center space-y-3">
+      <!-- Circular profile image -->
+      <img
+        src="https://i.pravatar.cc/150?img=12"
+        alt="Profile avatar"
+        class="w-24 h-24 rounded-full ring-4 ring-pink-300 object-cover"
+      />
+
+      <!-- Username + handle -->
+      <div>
+        <h3 class="text-xl font-bold text-gray-900">@alex.rivera</h3>
+        <p class="text-sm text-gray-500">Alex Rivera · Indie Producer 🎧</p>
+      </div>
+
+      <!-- Stats row -->
+      <div class="flex gap-6 text-sm text-gray-600 pt-1">
+        <span><strong class="text-gray-900">128</strong> posts</span>
+        <span><strong class="text-gray-900">12.4k</strong> followers</span>
+        <span><strong class="text-gray-900">340</strong> following</span>
+      </div>
+
+      <!-- Follow button — custom IG pink -->
+      <button
+        class="mt-3 px-8 py-2 rounded-full bg-igPink text-white font-semibold
+               hover:bg-pink-700 active:scale-95 transition-all duration-200 shadow-md">
+        Follow
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TASK 3: Spotify-style Horizontal Nav Bar
+       ------------------------------------------------------------
+       - Colored background (Spotify green or dark theme)
+       - Links spaced evenly using flex + gap utilities
+       - Rounded pill shape, hover states
+       ============================================================ -->
+  <section class="max-w-3xl mx-auto">
+    <h2 class="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-3 text-center">
+      Task 3 — Spotify Top Menu
+    </h2>
+
+    <nav class="flex items-center justify-between bg-black text-white rounded-full px-6 py-3 shadow-2xl">
+      <!-- Logo -->
+      <span class="text-spotify font-extrabold text-lg tracking-tight">
+        ♫ Spotifly
+      </span>
+
+      <!-- Links spaced evenly -->
+      <ul class="flex items-center gap-8 text-sm font-medium">
+        <li><a href="#" class="hover:text-spotify transition-colors">Home</a></li>
+        <li><a href="#" class="hover:text-spotify transition-colors">Search</a></li>
+        <li><a href="#" class="hover:text-spotify transition-colors">Library</a></li>
+      </ul>
+
+      <!-- CTA -->
+      <button class="bg-spotify text-black font-bold text-sm px-4 py-1.5 rounded-full
+                     hover:scale-105 transition-transform">
+        Log in
+      </button>
+    </nav>
+  </section>
+
+  <!-- ============================================================
+       TASK 4: Zomato-style Featured Restaurant Banner
+       ------------------------------------------------------------
+       - Large heading + subheading + CTA button
+       - Everything centered vertically & horizontally (flex utilities)
+       - Gradient background using bg-gradient-to-r
+       ============================================================ -->
+  <section class="max-w-4xl mx-auto">
+    <h2 class="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-3 text-center">
+      Task 4 — Zomato Featured Banner
+    </h2>
+
+    <div
+      class="relative flex flex-col justify-center items-center text-center
+             min-h-[280px] rounded-3xl px-8 py-12
+             bg-gradient-to-r from-red-500 via-rose-500 to-orange-400
+             text-white shadow-2xl overflow-hidden">
+
+      <!-- Decorative blur blob -->
+      <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-300 opacity-30 rounded-full blur-3xl"></div>
+
+      <!-- Large heading -->
+      <h1 class="relative text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-md">
+        Feast Your Way 🍽️
+      </h1>
+
+      <!-- Subheading -->
+      <p class="relative mt-3 text-base md:text-lg text-white/90 max-w-xl">
+        Discover top-rated restaurants near you — flat 50% off on your first order today.
+      </p>
+
+      <!-- Call-to-action button -->
+      <button
+        class="relative mt-6 px-8 py-3 rounded-full bg-white text-zomato font-bold text-base
+               shadow-lg hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all">
+        Order Now
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Footer note (still inside bg-sky-200 body)
+       ============================================================ -->
+  <p class="text-center text-sm text-gray-600 pt-4">
+    ✅ Tailwind loaded successfully — the page background is <code>bg-sky-200</code>.
+  </p>
+
+</body>
+</html>
